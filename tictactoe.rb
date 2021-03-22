@@ -25,29 +25,19 @@ def player_positions(player, position,board)
   BOARD[position] = player
 end
 
+# Check if position available
 
-# player_positions("X", 5, BOARD)
+# Check if draw if all squares are full
 
-# p BOARD
 
-# player_positions("O", 4, BOARD)
-
-# p BOARD
-
-# display_board(board)
 
 def win_game(board, player)
   win = false
   WIN.each do |value|
     count = 0
     value.each do |marker|
-      if BOARD[marker] == player
-        count += 1
-      end
-      if count == 3
-        win = true
-        break
-      end
+      count += 1 if BOARD[marker] == player
+      win = true if count == 3
     end
   end
   win
@@ -59,7 +49,7 @@ def start_game
   puts 'Welcome to the game of Tic Tac Toe'
   loop do
     puts "Player #{player}, please choose a position from 1-9"
-    position = gets.chomp!.to_i
+    position = gets.chomp!.to_i - 1
     player_positions(player,position,BOARD)
     display_board(BOARD)
     if win_game(BOARD, player)
