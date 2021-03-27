@@ -26,10 +26,24 @@ def player_positions(player, position,board)
 end
 
 # Check if position available
+def position_available(position)
+  BOARD[position].strip.empty?
+end
 
 # Check if draw if all squares are full
-
-
+def draw
+  result = true
+  BOARD.each do |x|
+    if x == "X" || x == "O"
+      next
+    elsif x == ' '
+      p 'false bitch'
+      result = false
+      break
+    end
+  end
+  result
+end
 
 def win_game(board, player)
   win = false
@@ -50,12 +64,23 @@ def start_game
   loop do
     puts "Player #{player}, please choose a position from 1-9"
     position = gets.chomp!.to_i - 1
-    player_positions(player,position,BOARD)
+    if position_available(position)
+      player_positions(player,position,BOARD)
+    else
+      p "Sorry that position is taken!"
+      next
+    end
     display_board(BOARD)
     if win_game(BOARD, player)
       puts "Player #{player} wins!"
       break
+    elsif draw
+      puts "draw bitch"
+      break
+
+
     end
+    player = player == 'X' ? 'O' : 'X'
   end
 end
 
