@@ -37,7 +37,6 @@ def draw
     if x == "X" || x == "O"
       next
     elsif x == ' '
-      p 'false bitch'
       result = false
       break
     end
@@ -59,8 +58,9 @@ end
 
 def start_game
   player = "X"
-
+  system("clear")
   puts 'Welcome to the game of Tic Tac Toe'
+  display_board(BOARD)
   loop do
     puts "Player #{player}, please choose a position from 1-9"
     position = gets.chomp!.to_i - 1
@@ -70,6 +70,7 @@ def start_game
       p "Sorry that position is taken!"
       next
     end
+    system("clear")
     display_board(BOARD)
     if win_game(BOARD, player)
       puts "Player #{player} wins!"
@@ -77,8 +78,6 @@ def start_game
     elsif draw
       puts "draw bitch"
       break
-
-
     end
     player = player == 'X' ? 'O' : 'X'
   end
